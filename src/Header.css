@@ -2,6 +2,7 @@
     position: sticky;
     top: 0;
     display: flex; /* Flex into a line */
+    background-color: white;
     justify-content: space-evenly; /* Space evenly to fit */
     border-bottom: 0.1px solid lightgray;
     padding-top: 10px;
