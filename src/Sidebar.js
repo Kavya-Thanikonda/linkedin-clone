@@ -1,11 +1,17 @@
 import React from 'react'
 
+import { useSelector } from 'react-redux'
+
 import { Avatar } from '@mui/material'
 
 import './Sidebar.css'
 
+import { selectUser } from './features/userSlice'
 
 function Sidebar() {
+
+    // Get the user from REDUX store
+    const user = useSelector(selectUser);
 
     /* Create a function */
     const recentItem = (topic) => (
@@ -23,9 +29,12 @@ function Sidebar() {
         <img src='' alt=''/>
 
         {/* Avatar */}
-        <Avatar className='sidebar__avatar'/>
-        <h2>Kavya Thanikonda</h2>
-        <h4>kthanikonda15@gmail.com</h4>
+        <Avatar src={user.photoURL} className='sidebar__avatar'>
+            {user.email[0]}
+        </Avatar> {/* Use first letter of e-mail if user does not have a profile picture */}
+
+        <h2>{user.displayName}</h2>
+        <h4>{user.email}</h4>
       </div>
 
       {/* Sidebar STATs */}

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
+import { useSelector } from 'react-redux';
+
 import CreateIcon from '@mui/icons-material/Create';
 import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
@@ -11,10 +13,11 @@ import './Feed.css';
 import InputOption from './InputOption';
 import Post from './Post';
 
+import { selectUser } from './features/userSlice';
+
 // New firebase imports
 import firebase from 'firebase/compat/app';
 import { db } from './firebase';
-
 
 /*
 1. Connect to Firestore DB
@@ -33,6 +36,8 @@ function Feed() {
     // useState takes in the initial value
     const [input, setInput] = useState('');
     const [posts, setPosts] = useState([]);
+
+    const user = useSelector(selectUser);
 
     // Setup a "real time listener"
     // Hook that lets us fire a piece of code when the feed component loads
@@ -65,10 +70,10 @@ function Feed() {
         // setPosts([...posts]); {/* Keep the earlier posts */}
 
         db.collection('posts').add({
-            name: 'Kavya Thanikonda',
-            description: 'This is a test',
+            name: user.displayName,
+            description: user.email,
             message: input, // This input field is value of the input field form that's first set into input variable using setInput
-            photoUrl: '',
+            photoUrl: user.photoURL,
             timestamp: firebase.firestore.FieldValue.serverTimestamp() // Standard time amoung timezones
         });
 
