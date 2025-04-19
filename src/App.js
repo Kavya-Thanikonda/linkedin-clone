@@ -14,6 +14,7 @@ import Feed from './Feed';
 /* Import REDUX user slices */
 import { login, logout, selectUser } from './features/userSlice';
 import { auth } from './firebase';
+import Widgets from './Widgets';
 
 function App() {
 
@@ -55,7 +56,7 @@ function App() {
         <div className='app__body'>
           <Sidebar/>
           <Feed/>
-          {/* Widgets */}
+          <Widgets/>
         </div>
       )}
     </div>
